@@ -11,6 +11,7 @@ cd test-project
 ```
 cd client; npm install; cd ../server; npm install   
 ```
+### Настройте окружение в server/.env
 ### Запуск сервера
 ```
 cd server

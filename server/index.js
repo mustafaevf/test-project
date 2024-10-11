@@ -4,6 +4,7 @@ const cors = require('cors');
 const routes = require('./routes');
 const connection = require('./connection');
 const models = require('./models/index');
+require('dotenv').config();
 
 const app = express();
 
@@ -19,13 +20,12 @@ app.use('/api', routes);
 
 connection.authenticate()
     .then(() => {
-        console.log("DATABASE COOL");
-        app.listen(8080, () => {
+        app.listen(process.env.PORT, () => {
             console.log("Server started");
         });
         return connection.sync({alter: false});
     })
-    .then(() => console.log("Модели норм"))
+    .then(() => console.log("Модели"))
     .catch((error) => {
         console.log(error);
     });
