@@ -11,6 +11,10 @@ cd test-project
 ```
 cd client; npm install; cd ../server; npm install   
 ```
+### sql-скрипт для создания БД с данными
+```
+psql -U <user> -f <file>
+```
 ### Настройте окружение в server/.env
 ### Запуск сервера
 ```

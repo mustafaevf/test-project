@@ -1,6 +1,5 @@
 const Product = require('../models/product');
 const User = require('../models/user');
-const sequelize = require('../connection');
 const { now } = require('sequelize/lib/utils');
 
 exports.getProducts = async (request, response) => {
@@ -8,11 +7,7 @@ exports.getProducts = async (request, response) => {
         const { offset, limit } = request.query; 
         let products;
         if (offset || limit) {
-            const query = `SELECT * FROM products LIMIT :limit OFFSET :offset`;
-            products = await sequelize.query(query, {
-                replacements: { limit: parseInt(limit) || 10, offset: parseInt(offset) || 0 },
-                type: sequelize.QueryTypes.SELECT,
-            });
+            products = await Product.getBooks(limit, offset);
         } else {
             products = await Product.findAll();
         }

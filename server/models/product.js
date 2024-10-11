@@ -30,4 +30,11 @@ const Product = connection.define('product',
     }
 );
 
+Product.getBooks = async (limit, offset) => {
+    return await connection.query(`SELECT * FROM products LIMIT :limit OFFSET :offset`, {
+        replacements: { limit: parseInt(limit), offset: parseInt(offset) },
+        type: connection.QueryTypes.SELECT,
+    });
+}
+
 module.exports = Product;

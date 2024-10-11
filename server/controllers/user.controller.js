@@ -1,5 +1,4 @@
 const User = require('../models/user');
-const sequelize = require('../connection');
 const { now } = require('sequelize/lib/utils');
 
 exports.getUsers = async (request, response) => {
@@ -7,15 +6,10 @@ exports.getUsers = async (request, response) => {
         const { offset, limit } = request.query; 
         let users;
         if (offset || limit) {
-            const query = `SELECT * FROM users LIMIT :limit OFFSET :offset`;
-            users = await sequelize.query(query, {
-                replacements: { limit: parseInt(limit) || 10, offset: parseInt(offset) || 0 },
-                type: sequelize.QueryTypes.SELECT,
-            });
+            users = await User.getUsers(limit, offset);
         } else {
             users = await User.findAll();
         }
-
         response.status(200).json(users);
     } catch (error) {
         response.status(500).json({ error: error.message });

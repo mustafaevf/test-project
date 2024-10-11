@@ -26,4 +26,11 @@ const User = connection.define('user',
     }
 );
 
+User.getUsers = async (limit, offset) => {
+    return await connection.query(`SELECT * FROM users LIMIT :limit OFFSET :offset`, {
+        replacements: { limit: parseInt(limit), offset: parseInt(offset) },
+        type: connection.QueryTypes.SELECT,
+    });
+}
+
 module.exports = User;
