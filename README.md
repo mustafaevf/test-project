@@ -1,5 +1,5 @@
 # test-project
-## Installation
+## Установка
 ```
 git clone https://github.com/mustafaevf/test-project.git
 ```
