@@ -11,7 +11,13 @@ cd test-project
 ```
 cd client; npm install; cd ../server; npm install   
 ```
-### Запуск
+### Запуск сервера
 ```
+cd server
+npm start
+```
+### Запуск клиента
+```
+cd client
 npm start
 ```
