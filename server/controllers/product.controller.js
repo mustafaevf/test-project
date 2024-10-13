@@ -55,8 +55,7 @@ exports.updateProduct = async (request, response) => {
 
 exports.createProduct = async (request, response) => {
     try {
-        const {title, price, userId} = request.body;
-        console.log(request.body);
+        const { title, price, userId, is_available } = request.body;
         // console.log(request);
         if(!title || !price || !userId) {
             return response.status(400).json({message: 'Fill'});
@@ -65,7 +64,7 @@ exports.createProduct = async (request, response) => {
         if(!user) {
             return response.status(400).json({message: 'User not founded'});
         }
-        const product = await Product.create({title: title, price: price, user_id: parseInt(userId), created_at: now()});
+        const product = await Product.create({title: title, price: price, user_id: parseInt(userId), created_at: now(), is_available: is_available});
         response.status(200).json({product});
     } catch (error) {
         console.log(error);

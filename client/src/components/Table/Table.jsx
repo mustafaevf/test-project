@@ -98,8 +98,8 @@ export default function Table({ entity, colDefs, fields }) {
 
   const handleOpenMenu = (action) => {
     setAction(action);
-    if (action === "create") {
-      setItem(fields.reduce((acc, field) => ({ ...acc, [field.name]: field.default || "" }), {}));
+    if (action === "create") {  
+      setItem(fields.reduce((acc, field) => ({ ...acc, [field.name]: field.type === "boolean" ? field.default || false : field.default || "" }), {}));
     } else if (action === "edit") {
       const selectedItem = getSelectedItem();
       if (!selectedItem) return;
@@ -183,12 +183,12 @@ export default function Table({ entity, colDefs, fields }) {
               ) : (
                 <MDBox display="flex" alignItems="center" ml={-1}>
                   <Switch
-                    checked={item[field.name]}
-                    onChange={() =>
+                    checked={item[field.name] === '' ? field.default : item[field.name]}
+                    onChange={() => (console.log(item),
                       setItem({
                         ...item,
-                        [field.name]: item[field.name] === "" ? field.default : !item[field.name],
-                      })
+                        [field.name]: !item[field.name],
+                      }))
                     }
                   />
                   <MDTypography
